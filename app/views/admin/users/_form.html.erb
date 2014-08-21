@@ -1,0 +1,105 @@
+<%= form_for [:admin,@user], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :first_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :first_name, :class => 'text_field' %>
+    </div>
+  </div>
+
+    <div class="control-group">
+      <%= f.label :last_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :last_name, :class => 'text_field' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'text_field' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+    <%= f.label :password, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password, :class => 'text_field',autocomplete: "off" %>
+    </div>
+  </div>
+
+    <div class="control-group">
+      <%= f.label :password_confirmation, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation, :class => 'text_field',autocomplete: "off" %>
+      </div>
+    </div>
+
+
+  <div class="control-group">
+    <%= f.label :phone_number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone_number, :class => 'text_field' %>
+    </div>
+  </div>
+
+    <div class="control-group">
+      <%= f.label :alternative_number, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :alternative_number, :class => 'text_field' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :address, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :address, :class => 'text_field' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :role, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.collection_select :role, current_user.set_role, :to_s, :humanize %>
+      </div>
+    </div>
+
+    <div class="control-group user_courses" style="display: none">
+      <%= f.label :course_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= collection_check_boxes(:user, :course_ids, Course.all, :id, :name, multiple: true, :prompt => "Please Select") %>
+      </div>
+    </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script>
+    $(document).ready(function() {
+        var role = $('#user_role').val();
+        is_student(role);
+
+        $('#user_role').change(function() {
+            var role_value = $(this).val();
+            is_student(role_value);
+        });
+
+        function is_student(role)
+        {
+            if(role=="student")
+            {
+                $('.user_courses').show();
+            }
+            else
+            {
+                $('.user_courses').hide();
+            }
+        }
+    });
+</script>
+

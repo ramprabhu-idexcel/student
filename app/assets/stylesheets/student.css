@@ -1,0 +1,6 @@
+.active, a.active:hover {
+    background: #000000;
+}
+.nav li:hover,.nav li:active {
+    background: #000000;
+}
